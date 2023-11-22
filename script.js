@@ -1,9 +1,9 @@
 "use strict";
 
-let formEl = document.querySelector("search"); // # is missing also quatation 
+let formEl = document.querySelector("#search"); // # is missing also quatation 
 let cityInputEl = document.querySelector("#city"); // # is missing also o is missing in Selector
 let tempEl = document.querySelector("#temp"); // # is missing 
-let messageEl = document.querySelector("#message"); // is missing
+let messageEl = document.querySelector("#message"); //# is missing
 
 async function getData() {
   // Fetch data from Open Weather Map API, passing the input value as city
@@ -14,9 +14,9 @@ async function getData() {
 
   // We get temperatures back in Kelvin so we need to convert nto Celsius
   // https://www.rapidtables.com/convert/temperature/kelvin-to-celsius.html
-  let temp = data.temp - 273.15;
+  let temp = data.main.temp - 273.15; //  data type error .main is missing
 
-  tempEl.textContent = `${temp}°C`; // should be backticks 
+  tempEl.textContent = temp.toFixed(2)+"°C";    // should be backticks and for 
 
   // Different temperature ranges should print different messages:
   //
@@ -37,6 +37,6 @@ async function getData() {
 }
 
 formEl.addEventListener("submit", function (e) {  // finction is missing ()
-  preventDefault();
+ e.preventDefault(); // run time refrence error function should be invoked.
   getData();
 });
